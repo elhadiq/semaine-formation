@@ -1,0 +1,4 @@
+{{- /* Renvoie la page d'accueil de l'édition de formation contenant la page, sinon rien */ -}}
+{{- $ed := false -}}
+{{- if and (not .IsHome) .FirstSection.Params.edition -}}{{- $ed = .FirstSection -}}{{- end -}}
+{{- return $ed -}}

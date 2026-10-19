@@ -1,5 +1,6 @@
 {{- $c := .c -}}
 {{- $date := .date -}}
+{{- $ed := .ed -}}
 {{- $simple := in (slice "pause" "repas") $c.type -}}
 <li class="creneau creneau--{{ $c.type }}" data-debut="{{ $date }}T{{ $c.debut }}" {{ with $c.fin }}data-fin="{{ $date }}T{{ . }}"{{ end }}>
   <div class="creneau__heure"><time>{{ $c.debut }}</time>{{ with $c.fin }}<span>– {{ . }}</span>{{ end }}</div>
@@ -13,9 +14,9 @@
         <span class="badge-en-cours" hidden>En cours</span>
       </p>
       <h4 class="creneau__titre">
-        {{- with $c.formation }}{{ with site.GetPage (printf "/formations/%s" .) }}<a href="{{ .RelPermalink }}">{{ $c.titre }}</a>{{ else }}{{ $c.titre }}{{ end }}{{ else }}{{ $c.titre }}{{ end -}}
+        {{- with $c.formation }}{{ with $ed.GetPage (printf "formations/%s" .) }}<a href="{{ .RelPermalink }}">{{ $c.titre }}</a>{{ else }}{{ $c.titre }}{{ end }}{{ else }}{{ $c.titre }}{{ end -}}
       </h4>
-      {{- with $c.intervenants }}<p class="creneau__qui">{{ partial "intervenant-noms.html" . }}</p>{{ end }}
+      {{- with $c.intervenants }}<p class="creneau__qui">{{ partial "intervenant-noms.html" (dict "ids" . "int" $.int) }}</p>{{ end }}
     {{- end }}
   </div>
 </li>

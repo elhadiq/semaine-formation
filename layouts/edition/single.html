@@ -1,0 +1,30 @@
+{{ define "main" }}
+{{- $ed := partial "edition.html" . -}}
+{{- $d := partial "edition-data.html" $ed -}}
+{{- $int := $d.intervenants | default dict -}}
+<article class="section section--page">
+  <div class="conteneur conteneur--etroit">
+    <header class="section__entete">
+      <p class="surtitre"><a href="{{ .Parent.RelPermalink }}">{{ .Parent.Title }}</a></p>
+      {{ with .Params.domaine }}<span class="etiquette">{{ . }}</span>{{ end }}
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.intervenants }}<p class="carte__qui">{{ partial "intervenant-noms.html" (dict "ids" . "int" $int) }}</p>{{ end }}
+    </header>
+
+    {{ $slug := path.Base (strings.TrimSuffix "/" .File.Dir) }}
+    {{ $seances := slice }}
+    {{ range $d.programme.jours }}{{ $j := . }}{{ range .creneaux }}{{ if eq .formation $slug }}{{ $seances = $seances | append (printf "%s · %s%s — %s" $j.titre .debut (cond (ne .fin "") (printf " – %s" .fin) "") .titre) }}{{ end }}{{ end }}{{ end }}
+    {{ with $seances }}
+    <div class="encadre">
+      <h2>Au programme</h2>
+      <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+    </div>
+    {{ end }}
+
+    <div class="prose">{{ .Content }}</div>
+
+    <h2>Supports</h2>
+    {{ partial "fichiers.html" . }}
+  </div>
+</article>
+{{ end }}

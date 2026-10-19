@@ -3,14 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ if .IsHome }}{{ site.Title }} · {{ site.Params.ville }} 2026{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ site.Title }} — {{ site.Params.sousTitre }}. {{ site.Params.dates }}, {{ site.Params.lieu }}, {{ site.Params.ville }}.">
-  <meta property="og:title" content="{{ site.Title }}">
-  <meta property="og:description" content="{{ site.Params.sousTitre }} — {{ site.Params.dates }}, {{ site.Params.ville }}">
-  <meta property="og:image" content="{{ "img/programme.jpg" | absURL }}">
+  {{- $ed := partial "edition.html" . }}
+  <title>{{ if .IsHome }}{{ site.Title }} · Informatique en classes préparatoires{{ else if and $ed (ne $ed .) }}{{ .Title }} · {{ $ed.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  {{- $desc := or .Params.resume .Description site.Params.description }}
+  <meta name="description" content="{{ $desc }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ $desc }}">
   <meta property="og:type" content="website">
+  {{- with $ed }}{{ with .Resources.GetMatch "affiche.jpg" }}<meta property="og:image" content="{{ .Permalink }}">{{ end }}{{ end }}
   <meta name="theme-color" content="#0d3b36">
   <link rel="icon" href="{{ "img/favicon.svg" | relURL }}" type="image/svg+xml">
+  {{ with .OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">{{ end }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,6 +22,7 @@
 </head>
 <body>
   {{ partial "header.html" . }}
+  {{ with $ed }}{{ partial "edition-nav.html" (dict "ed" . "page" $) }}{{ end }}
   <main id="contenu">
     {{ block "main" . }}{{ end }}
   </main>

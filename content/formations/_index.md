@@ -1,4 +1,4 @@
 ---
-title: "Formations et supports"
-description: "Cours, TP et ateliers de la semaine — chaque formation avec ses supports à télécharger."
+title: "Formations"
+description: "Les semaines et journées de formation destinées aux enseignants d'informatique des CPGE."
 ---

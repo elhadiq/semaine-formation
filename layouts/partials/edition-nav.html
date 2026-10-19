@@ -1,0 +1,12 @@
+{{- $ed := .ed -}}{{- $p := .page -}}
+<nav class="sous-nav" aria-label="{{ $ed.Title }}">
+  <div class="conteneur sous-nav__barre">
+    <a class="sous-nav__titre" href="{{ $ed.RelPermalink }}">{{ $ed.Title }} <span>{{ $ed.Params.dates }}</span></a>
+    <div class="sous-nav__liens">
+      <a href="{{ $ed.RelPermalink }}#programme">Programme</a>
+      <a href="{{ $ed.RelPermalink }}#intervenants">Intervenants</a>
+      {{ with $ed.GetPage "formations" }}<a href="{{ .RelPermalink }}"{{ if or (eq $p .) (eq $p.Parent .) }} aria-current="page"{{ end }}>Supports</a>{{ end }}
+      <a href="{{ $ed.RelPermalink }}#infos">Infos pratiques</a>
+    </div>
+  </div>
+</nav>

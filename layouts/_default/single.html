@@ -1,0 +1,14 @@
+{{ define "main" }}
+<article class="section section--page">
+  <div class="conteneur conteneur--etroit">
+    <header class="section__entete">
+      <p class="surtitre"><a href="{{ .Parent.RelPermalink }}">{{ .Parent.Title }}</a></p>
+      {{ with .Params.domaine }}<span class="etiquette">{{ . }}</span>{{ end }}
+      <h1>{{ .Title }}</h1>
+      {{ if eq .Section "actualites" }}<p class="carte__qui"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time></p>{{ end }}
+    </header>
+    <div class="prose">{{ .Content }}</div>
+    {{ with partial "fichiers-liste.html" . }}<h2>Fichiers</h2>{{ partial "fichiers.html" $ }}{{ end }}
+  </div>
+</article>
+{{ end }}

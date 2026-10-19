@@ -1,21 +1,42 @@
-baseURL = "https://info-cpge.men/formation-2026/"
+baseURL = "https://info-cpge.men/"
 languageCode = "fr-FR"
 defaultContentLanguage = "fr"
-title = "Semaine de Formation Académique"
+title = "Info CPGE"
 enableRobotsTXT = true
-disableKinds = ["taxonomy", "term", "RSS"]
+disableKinds = ["taxonomy", "term"]
 
 [params]
-  sousTitre = "Vers une pédagogie renouvelée en classes préparatoires"
-  themes = ["Algorithmique", "OCaml", "Probabilités", "Graphes", "Théorie des jeux", "IA"]
-  dates = "19 – 21 octobre 2026"
-  lieu = "Lycée Méditerranéen – LYMED"
-  ville = "Tétouan"
-  organisateur = "Ministère de l'Éducation nationale, du Préscolaire et des Sports"
-  # Dépôt GitHub au format "utilisateur/depot" : active les boutons « Ouvrir dans Colab »
-  # pour les notebooks. Laisser vide pour les masquer.
+  description = "Informatique en classes préparatoires : formations, cours, ressources et actualités pour les enseignants."
+  accroche = "Formations, cours, ressources et actualités pour les enseignants d'informatique des CPGE."
+  # Dépôt GitHub "utilisateur/depot" : active les boutons « Ouvrir dans Colab » des notebooks.
   githubRepo = "elhadiq/semaine-formation"
   brancheGithub = "main"
+
+# Menu principal (ordre = weight)
+[[menus.main]]
+  name = "Accueil"
+  pageRef = "/"
+  weight = 10
+[[menus.main]]
+  name = "Formations"
+  pageRef = "/formations"
+  weight = 20
+[[menus.main]]
+  name = "Cours"
+  pageRef = "/cours"
+  weight = 30
+[[menus.main]]
+  name = "Ressources"
+  pageRef = "/ressources"
+  weight = 40
+[[menus.main]]
+  name = "Actualités"
+  pageRef = "/actualites"
+  weight = 50
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML"]
 
 [markup.goldmark.renderer]
   unsafe = true

@@ -1,0 +1,3 @@
+{{- /* Données (programme, intervenants) d'une édition : data/<dossier de l'édition>/ */ -}}
+{{- $slug := path.Base (strings.TrimSuffix "/" .File.Dir) -}}
+{{- return (index site.Data $slug) | default dict -}}

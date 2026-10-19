@@ -1,0 +1,9 @@
+{{- /* Fichiers téléchargeables déposés dans le dossier de la page (hors images d'affiche) */ -}}
+{{- $fichiers := slice -}}
+{{- range .Resources -}}
+  {{- $ext := path.Ext .Name | lower -}}
+  {{- if in (slice ".pdf" ".ipynb" ".pptx" ".ppt" ".docx" ".doc" ".odt" ".zip" ".py" ".ml" ".sql" ".xlsx" ".csv" ".html" ".tex" ".txt") $ext -}}
+    {{- $fichiers = $fichiers | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $fichiers -}}

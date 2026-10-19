@@ -1,0 +1,13 @@
+{{- /* Carte d'aperçu d'une page ou d'une rubrique */ -}}
+{{- $n := len (partial "fichiers-liste.html" .) -}}
+<li class="carte">
+  {{- if .Params.edition }}<span class="etiquette">{{ .Params.dates }}{{ with .Params.ville }} · {{ . }}{{ end }}</span>
+  {{- else if eq .Section "actualites" }}<time class="etiquette" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
+  {{- else if .Params.domaine }}<span class="etiquette">{{ .Params.domaine }}</span>
+  {{- end }}
+  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  {{ with or .Params.resume .Description }}<p class="carte__texte">{{ . }}</p>{{ end }}
+  {{- if .Params.edition }}<p class="carte__pied">Programme, intervenants et supports →</p>
+  {{- else if .IsSection }}<p class="carte__pied">{{ len .Pages }} élément{{ if gt (len .Pages) 1 }}s{{ end }}</p>
+  {{- else if $n }}<p class="carte__pied">{{ $n }} fichier{{ if gt $n 1 }}s{{ end }}</p>{{ end }}
+</li>

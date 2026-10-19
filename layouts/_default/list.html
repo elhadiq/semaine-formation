@@ -1,0 +1,24 @@
+{{ define "main" }}
+<section class="section section--page">
+  <div class="conteneur">
+    <header class="section__entete">
+      {{ if not .Parent.IsHome }}<p class="surtitre"><a href="{{ .Parent.RelPermalink }}">{{ .Parent.Title }}</a></p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </header>
+    {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+
+    {{ $elements := .Pages }}
+    {{ if eq .Section "formations" }}{{ $elements = where site.Sections "Params.edition" true }}{{ end }}
+    {{ if eq .Section "actualites" }}{{ $elements = $elements.ByDate.Reverse }}{{ else if eq .Section "formations" }}{{ $elements = $elements.ByDate.Reverse }}{{ else }}{{ $elements = $elements.ByWeight }}{{ end }}
+
+    {{ with $elements }}
+    <ul class="grille-cartes">{{ range . }}{{ partial "carte.html" . }}{{ end }}</ul>
+    {{ else }}
+    <p class="vide">Contenu à venir.</p>
+    {{ end }}
+
+    {{ with partial "fichiers-liste.html" . }}<h2>Fichiers</h2>{{ partial "fichiers.html" $ }}{{ end }}
+  </div>
+</section>
+{{ end }}

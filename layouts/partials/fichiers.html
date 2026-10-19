@@ -1,12 +1,6 @@
-{{- /* Liste les fichiers déposés dans le dossier de la formation (page bundle) */ -}}
+{{- /* Affiche les fichiers déposés dans le dossier de la page (page bundle) */ -}}
 {{- $page := . -}}
-{{- $fichiers := slice -}}
-{{- range .Resources -}}
-  {{- $ext := path.Ext .Name | lower -}}
-  {{- if in (slice ".pdf" ".ipynb" ".pptx" ".ppt" ".docx" ".zip" ".py" ".ml" ".sql" ".xlsx" ".csv" ".html") $ext -}}
-    {{- $fichiers = $fichiers | append . -}}
-  {{- end -}}
-{{- end -}}
+{{- $fichiers := partial "fichiers-liste.html" . -}}
 {{- if $fichiers -}}
 <ul class="fichiers">
   {{- range $fichiers }}

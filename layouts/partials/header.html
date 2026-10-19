@@ -2,15 +2,16 @@
 <header class="entete">
   <div class="conteneur entete__barre">
     <a class="marque" href="{{ site.Home.RelPermalink }}">
-      <span class="marque__sigle" aria-hidden="true">SFA</span>
-      <span class="marque__texte">{{ site.Title }}<small>{{ site.Params.ville }} · 2026</small></span>
+      <span class="marque__sigle" aria-hidden="true">IC</span>
+      <span class="marque__texte">{{ site.Title }}<small>Informatique en CPGE</small></span>
     </a>
     <nav class="nav" aria-label="Navigation principale">
-      {{ $home := site.Home.RelPermalink }}
-      <a href="{{ $home }}#programme">Programme</a>
-      <a href="{{ $home }}#intervenants">Intervenants</a>
-      <a href="{{ "formations/" | relURL }}"{{ if eq .Section "formations" }} aria-current="page"{{ end }}>Supports</a>
-      <a href="{{ $home }}#infos">Infos pratiques</a>
+      {{- $courante := . }}
+      {{- range site.Menus.main }}
+      {{- $actif := or ($courante.IsMenuCurrent "main" .) ($courante.HasMenuCurrent "main" .) }}
+      {{- if and (eq .Name "Formations") ($courante.FirstSection.Params.edition) }}{{ $actif = true }}{{ end }}
+      <a href="{{ .URL }}"{{ if $actif }} aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{- end }}
     </nav>
   </div>
 </header>

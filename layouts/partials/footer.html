@@ -1,12 +1,18 @@
+{{- $ed := partial "edition.html" . -}}
 <footer class="pied">
   <div class="conteneur pied__grille">
     <div>
       <p class="pied__titre">{{ site.Title }}</p>
-      <p>{{ site.Params.dates }} · {{ site.Params.lieu }}, {{ site.Params.ville }}</p>
+      <p>{{ site.Params.accroche }}</p>
     </div>
     <div>
-      <p>Organisé par le {{ site.Params.organisateur }}.</p>
-      <p><a href="{{ "img/programme.png" | relURL }}">Affiche du programme (PNG)</a></p>
+      {{- with $ed }}
+      <p><strong>{{ .Title }}</strong> — {{ .Params.dates }} · {{ .Params.lieu }}, {{ .Params.ville }}</p>
+      {{ with .Params.organisateur }}<p>Organisé par le {{ . }}.</p>{{ end }}
+      {{ with .Resources.GetMatch "affiche.png" }}<p><a href="{{ .RelPermalink }}">Affiche du programme (PNG)</a></p>{{ end }}
+      {{- else }}
+      <nav class="pied__nav" aria-label="Rubriques">{{ range site.Menus.main }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}</nav>
+      {{- end }}
     </div>
   </div>
 </footer>
