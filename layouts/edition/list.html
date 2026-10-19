@@ -60,8 +60,12 @@
 <section id="intervenants" class="section section--teinte">
   <div class="conteneur">
     <header class="section__entete"><h2>Intervenants</h2></header>
+    {{- /* Ordre de passage : première apparition dans le programme, puis les autres */ -}}
+    {{- $ordre := slice -}}
+    {{- range $jours }}{{ range .creneaux }}{{ range .intervenants }}{{ if not (in $ordre .) }}{{ $ordre = $ordre | append . }}{{ end }}{{ end }}{{ end }}{{ end -}}
+    {{- range $id, $_ := $int }}{{ if not (in $ordre $id) }}{{ $ordre = $ordre | append $id }}{{ end }}{{ end -}}
     <ul class="intervenants">
-      {{ range $id, $p := . }}{{ if not $p.collectif }}
+      {{ range $id := $ordre }}{{ with index $int $id }}{{ $p := . }}{{ if not $p.collectif }}
       <li class="carte-int">
         {{ with $p.photo }}<img src="{{ . | relURL }}" alt="" class="carte-int__photo">{{ else }}<span class="carte-int__initiales" aria-hidden="true">{{ partial "initiales.html" $p.nom }}</span>{{ end }}
         <div>
@@ -73,7 +77,7 @@
           </ul>{{ end }}
         </div>
       </li>
-      {{ end }}{{ end }}
+      {{ end }}{{ end }}{{ end }}
     </ul>
     {{ with $int.comite }}<p class="note">Les ateliers, les tables rondes de clôture et la restitution sont animés par le {{ .nom | lower }}.</p>{{ end }}
   </div>
