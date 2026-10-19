@@ -37,7 +37,13 @@ jobs:
       - name: Construire
         env:
           HUGO_ENVIRONMENT: production
-        run: hugo --gc --minify --baseURL "https://info-cpge.men/"
+        run: |
+          # Le site est publié sous https://info-cpge.men/formation-2026/
+          hugo --gc --minify --destination public/formation-2026
+          # Racine du domaine : page générale (dossier racine/, publiée telle quelle)
+          cp -r racine/. public/
+          cp public/formation-2026/404.html public/404.html
+          echo "info-cpge.men" > public/CNAME
       - name: Téléverser
         uses: actions/upload-pages-artifact@v3
         with:

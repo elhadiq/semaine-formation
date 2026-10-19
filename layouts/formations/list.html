@@ -2,7 +2,7 @@
 <section class="section section--page">
   <div class="conteneur">
     <header class="section__entete">
-      <p class="surtitre"><a href="{{ "/" | relURL }}">Accueil</a></p>
+      <p class="surtitre"><a href="{{ site.Home.RelPermalink }}">Accueil</a></p>
       <h1>{{ .Title }}</h1>
       {{ with .Description }}<p>{{ . }}</p>{{ end }}
     </header>

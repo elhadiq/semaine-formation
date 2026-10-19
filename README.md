@@ -65,3 +65,10 @@ En une à deux minutes, l'onglet **Actions** passe au vert et les fichiers sont 
 
 - **Remplacer :** écraser le fichier en gardant le même nom, puis publier.
 - **Retirer :** supprimer le fichier, retirer son entrée `- src:` dans `index.md` s'il en avait une, puis publier.
+
+## Structure des adresses
+
+- `https://info-cpge.men/` : page générale, fichier `racine/index.html` (HTML simple, à modifier directement).
+- `https://info-cpge.men/formation-2026/` : site de la formation, généré par Hugo à partir de `content/`, `data/` et `hugo.toml`.
+
+Tout fichier ajouté dans `racine/` est publié à la racine du domaine (ex. `racine/contact.html` → `info-cpge.men/contact.html`).
