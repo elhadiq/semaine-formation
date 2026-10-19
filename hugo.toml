@@ -14,7 +14,7 @@ disableKinds = ["taxonomy", "term", "RSS"]
   organisateur = "Ministère de l'Éducation nationale, du Préscolaire et des Sports"
   # Dépôt GitHub au format "utilisateur/depot" : active les boutons « Ouvrir dans Colab »
   # pour les notebooks. Laisser vide pour les masquer.
-  githubRepo = ""
+  githubRepo = "elhadiq/semaine-formation"
   brancheGithub = "main"
 
 [markup.goldmark.renderer]
