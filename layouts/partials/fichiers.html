@@ -1,0 +1,29 @@
+{{- /* Liste les fichiers déposés dans le dossier de la formation (page bundle) */ -}}
+{{- $page := . -}}
+{{- $fichiers := slice -}}
+{{- range .Resources -}}
+  {{- $ext := path.Ext .Name | lower -}}
+  {{- if in (slice ".pdf" ".ipynb" ".pptx" ".ppt" ".docx" ".zip" ".py" ".ml" ".sql" ".xlsx" ".csv" ".html") $ext -}}
+    {{- $fichiers = $fichiers | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- if $fichiers -}}
+<ul class="fichiers">
+  {{- range $fichiers }}
+  {{- $ext := strings.TrimPrefix "." (path.Ext .Name | lower) }}
+  <li class="fichier">
+    <span class="fichier__type fichier__type--{{ $ext }}">{{ if eq $ext "ipynb" }}notebook{{ else }}{{ $ext }}{{ end }}</span>
+    <span class="fichier__titre">{{ if ne .Title .Name }}{{ .Title }}{{ else }}{{ replace (path.BaseName .Name) "-" " " | humanize }}{{ end }}</span>
+    <span class="fichier__actions">
+      <a class="bouton bouton--petit" href="{{ .RelPermalink }}" download>Télécharger</a>
+      {{- if eq $ext "pdf" }}<a class="bouton bouton--petit bouton--discret" href="{{ .RelPermalink }}" target="_blank" rel="noopener">Ouvrir</a>{{ end }}
+      {{- if and (eq $ext "ipynb") site.Params.githubRepo }}
+      <a class="bouton bouton--petit bouton--discret" href="https://colab.research.google.com/github/{{ site.Params.githubRepo }}/blob/{{ site.Params.brancheGithub }}/content/{{ $page.File.Dir | replaceRE "\\\\" "/" }}{{ .Name }}" target="_blank" rel="noopener">Ouvrir dans Colab</a>
+      {{- end }}
+    </span>
+  </li>
+  {{- end }}
+</ul>
+{{- else -}}
+<p class="vide">Les supports seront publiés ici dès qu'ils seront disponibles.</p>
+{{- end -}}

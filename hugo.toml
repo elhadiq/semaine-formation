@@ -1,0 +1,21 @@
+baseURL = "https://info-cpge.men/"
+languageCode = "fr-FR"
+defaultContentLanguage = "fr"
+title = "Semaine de Formation Académique"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[params]
+  sousTitre = "Vers une pédagogie renouvelée en classes préparatoires"
+  themes = ["Algorithmique", "OCaml", "Probabilités", "Graphes", "Théorie des jeux", "IA"]
+  dates = "19 – 21 octobre 2026"
+  lieu = "Lycée Méditerranéen – LYMED"
+  ville = "Tétouan"
+  organisateur = "Ministère de l'Éducation nationale, du Préscolaire et des Sports"
+  # Dépôt GitHub au format "utilisateur/depot" : active les boutons « Ouvrir dans Colab »
+  # pour les notebooks. Laisser vide pour les masquer.
+  githubRepo = ""
+  brancheGithub = "main"
+
+[markup.goldmark.renderer]
+  unsafe = true

@@ -1,0 +1,2 @@
+{{- $mots := split (replaceRE "^M\\.\\s*" "" .) " " -}}
+{{- range first 2 $mots }}{{ substr . 0 1 | upper }}{{ end -}}

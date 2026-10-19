@@ -1,0 +1,134 @@
+# Programme de la semaine.
+# date : AAAA-MM-JJ — debut / fin : HH:MM (heure de Tétouan).
+# type : seance | atelier | table-ronde | pause | repas | cloture
+# intervenants : identifiants définis dans data/intervenants.yaml
+# formation : nom du dossier dans content/formations/ (lien vers la page et ses supports)
+
+jours:
+  - date: "2026-10-19"
+    titre: "Lundi 19 octobre"
+    creneaux:
+      - debut: "08:00"
+        fin: "09:15"
+        type: seance
+        titre: "Simulation des lois de probabilités – Chaînes de Markov"
+        partie: "Partie 1"
+        domaine: "Probabilités"
+        intervenants: [kanber, laaroussi]
+        formation: simulation-des-lois
+      - debut: "09:20"
+        fin: "10:30"
+        type: seance
+        titre: "Estimation ponctuelle et par intervalle de confiance"
+        partie: "Partie 2"
+        domaine: "Probabilités"
+        intervenants: [kanber, laaroussi]
+        formation: estimation-markov
+      - debut: "10:30"
+        fin: "10:45"
+        type: pause
+        titre: "Pause"
+      - debut: "10:45"
+        fin: "12:30"
+        type: seance
+        titre: "Introduction à la programmation fonctionnelle – OCaml"
+        domaine: "Programmation"
+        intervenants: [kharbane]
+        formation: ocaml
+      - debut: "12:30"
+        fin: "14:30"
+        type: repas
+        titre: "Déjeuner"
+      - debut: "14:30"
+        fin: "16:00"
+        type: seance
+        titre: "Méthodes d'enseignement et EdTech : LMS"
+        domaine: "Pédagogie numérique"
+        intervenants: [elhadiq]
+        formation: lms-moodle
+      - debut: "16:00"
+        fin: "16:15"
+        type: pause
+        titre: "Pause"
+      - debut: "16:15"
+        fin: "18:00"
+        type: atelier
+        titre: "Atelier 1"
+        domaine: "Atelier"
+        intervenants: [comite]
+        formation: simulation-des-lois
+      - debut: "19:00"
+        fin: "20:00"
+        type: repas
+        titre: "Dîner"
+
+  - date: "2026-10-20"
+    titre: "Mardi 20 octobre"
+    creneaux:
+      - debut: "08:00"
+        fin: "09:30"
+        type: seance
+        titre: "Théorie des graphes"
+        domaine: "Graphes"
+        intervenants: [essaddouki]
+        formation: theorie-des-graphes
+      - debut: "09:30"
+        fin: "11:00"
+        type: seance
+        titre: "Théorie des jeux"
+        domaine: "Théorie des jeux"
+        intervenants: [chafik]
+        formation: theorie-des-jeux
+      - debut: "11:00"
+        fin: "11:15"
+        type: pause
+        titre: "Pause"
+      - debut: "11:15"
+        fin: "12:30"
+        type: table-ronde
+        titre: "Table ronde : intégrer l'IA dans sa pratique pédagogique"
+        domaine: "Intelligence artificielle"
+        intervenants: [naim]
+        formation: ia-pedagogie
+      - debut: "12:30"
+        fin: "14:30"
+        type: repas
+        titre: "Déjeuner"
+      - debut: "14:30"
+        fin: "16:00"
+        type: seance
+        titre: "Analyse et conception des algorithmes"
+        domaine: "Algorithmique"
+        intervenants: [malik]
+        formation: algorithmique
+      - debut: "16:00"
+        fin: "16:15"
+        type: pause
+        titre: "Pause"
+      - debut: "16:15"
+        fin: "18:00"
+        type: atelier
+        titre: "Atelier 2"
+        domaine: "Atelier"
+        intervenants: [comite]
+        formation: estimation-markov
+      - debut: "19:00"
+        fin: "20:00"
+        type: repas
+        titre: "Dîner"
+
+  - date: "2026-10-21"
+    titre: "Mercredi 21 octobre"
+    creneaux:
+      - debut: "08:30"
+        fin: "10:00"
+        type: table-ronde
+        titre: "Table ronde de clôture des ateliers"
+        domaine: "Clôture"
+        intervenants: [comite]
+      - debut: "10:00"
+        fin: ""
+        type: cloture
+        titre: "Restitution des travaux et clôture officielle de la formation"
+        domaine: "Clôture"
+        intervenants: [comite]

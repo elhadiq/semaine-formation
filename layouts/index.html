@@ -1,0 +1,95 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="conteneur hero__grille">
+    <div class="hero__texte">
+      <p class="surtitre">Royaume du Maroc · {{ site.Params.organisateur }}</p>
+      <h1>{{ site.Title }}</h1>
+      <p class="hero__sous">{{ site.Params.sousTitre }}</p>
+      <ul class="themes" aria-label="Thèmes">{{ range site.Params.themes }}<li>{{ . }}</li>{{ end }}</ul>
+      <div class="hero__infos">
+        <p><strong>{{ site.Params.dates }}</strong></p>
+        <p>{{ site.Params.lieu }} · {{ site.Params.ville }}</p>
+      </div>
+      <div class="hero__actions">
+        <a class="bouton" href="#programme">Voir le programme</a>
+        <a class="bouton bouton--clair" href="{{ "formations/" | relURL }}">Supports de formation</a>
+      </div>
+    </div>
+    <aside class="hero__chiffres" aria-label="En bref">
+      {{ $nbSeances := 0 }}{{ range site.Data.programme.jours }}{{ range .creneaux }}{{ if not (in (slice "pause" "repas") .type) }}{{ $nbSeances = add $nbSeances 1 }}{{ end }}{{ end }}{{ end }}
+      {{ $nbInt := 0 }}{{ range site.Data.intervenants }}{{ if not .collectif }}{{ $nbInt = add $nbInt 1 }}{{ end }}{{ end }}
+      <div><span>{{ len site.Data.programme.jours }}</span>jours</div>
+      <div><span>{{ $nbSeances }}</span>séances</div>
+      <div><span>{{ $nbInt }}</span>intervenants</div>
+      <div><span>{{ len (where site.RegularPages "Section" "formations") }}</span>formations</div>
+    </aside>
+  </div>
+</section>
+
+<section id="programme" class="section">
+  <div class="conteneur">
+    <header class="section__entete">
+      <h2>Programme</h2>
+      <p>Horaires à l'heure de {{ site.Params.ville }}. La séance en cours est signalée pendant la formation.</p>
+    </header>
+    <div class="onglets" role="tablist" aria-label="Jours">
+      {{ range $i, $j := site.Data.programme.jours }}
+      <button role="tab" id="onglet-{{ $j.date }}" aria-controls="jour-{{ $j.date }}" aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}" data-date="{{ $j.date }}">{{ $j.titre }}</button>
+      {{ end }}
+    </div>
+    {{ range $i, $j := site.Data.programme.jours }}
+    <div class="jour" role="tabpanel" id="jour-{{ $j.date }}" aria-labelledby="onglet-{{ $j.date }}" {{ if ne $i 0 }}data-masque{{ end }}>
+      <h3 class="jour__titre">{{ $j.titre }}</h3>
+      <ol class="creneaux">
+        {{ range $j.creneaux }}{{ partial "creneau.html" (dict "c" . "date" $j.date) }}{{ end }}
+      </ol>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<section id="intervenants" class="section section--teinte">
+  <div class="conteneur">
+    <header class="section__entete">
+      <h2>Intervenants</h2>
+    </header>
+    <ul class="intervenants">
+      {{ range $id, $p := site.Data.intervenants }}
+      {{ if not $p.collectif }}
+      <li class="carte-int">
+        {{ with $p.photo }}<img src="{{ . | relURL }}" alt="" class="carte-int__photo">{{ else }}<span class="carte-int__initiales" aria-hidden="true">{{ partial "initiales.html" $p.nom }}</span>{{ end }}
+        <div>
+          <h3>{{ $p.nom }}</h3>
+          {{ with $p.affiliation }}<p class="carte-int__aff">{{ . }}</p>{{ end }}
+          {{ with $p.bio }}<p>{{ . }}</p>{{ end }}
+          <ul class="carte-int__forms">
+            {{ range where site.RegularPages "Section" "formations" }}{{ if in .Params.intervenants $id }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}{{ end }}
+          </ul>
+        </div>
+      </li>
+      {{ end }}
+      {{ end }}
+    </ul>
+    {{ with site.Data.intervenants.comite }}<p class="note">Les ateliers, les tables rondes de clôture et la restitution sont animés par le {{ .nom | lower }}.</p>{{ end }}
+  </div>
+</section>
+
+<section id="infos" class="section">
+  <div class="conteneur infos">
+    <div>
+      <h2>Infos pratiques</h2>
+      <dl class="infos__liste">
+        <dt>Dates</dt><dd>{{ site.Params.dates }}</dd>
+        <dt>Lieu</dt><dd>{{ site.Params.lieu }}, {{ site.Params.ville }}</dd>
+        <dt>Public</dt><dd>Enseignants des classes préparatoires aux grandes écoles</dd>
+        <dt>Organisation</dt><dd>{{ site.Params.organisateur }}</dd>
+      </dl>
+      <p><a class="bouton bouton--clair" href="https://www.openstreetmap.org/search?query={{ printf "%s %s" site.Params.lieu site.Params.ville | urlquery }}" target="_blank" rel="noopener">Voir sur la carte</a></p>
+    </div>
+    <figure class="affiche">
+      <a href="{{ "img/programme.png" | relURL }}"><img src="{{ "img/programme.jpg" | relURL }}" alt="Affiche du programme de la Semaine de Formation Académique" loading="lazy" width="1491" height="1055"></a>
+      <figcaption>Affiche officielle — cliquer pour agrandir</figcaption>
+    </figure>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,12 @@
+<footer class="pied">
+  <div class="conteneur pied__grille">
+    <div>
+      <p class="pied__titre">{{ site.Title }}</p>
+      <p>{{ site.Params.dates }} · {{ site.Params.lieu }}, {{ site.Params.ville }}</p>
+    </div>
+    <div>
+      <p>Organisé par le {{ site.Params.organisateur }}.</p>
+      <p><a href="{{ "img/programme.png" | relURL }}">Affiche du programme (PNG)</a></p>
+    </div>
+  </div>
+</footer>

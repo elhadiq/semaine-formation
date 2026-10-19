@@ -1,0 +1,67 @@
+# Intervenants. Compléter prénom, établissement et bio quand ils sont connus ;
+# les champs vides sont simplement masqués sur le site.
+# photo : chemin sous static/ (ex. "img/intervenants/kanber.jpg"), sinon initiales.
+
+kanber:
+  nom: "Ahmed Kanber"
+  affiliation: "CPA – CRMEF Marrakech"
+  themes: ["Simulation des lois de probabilités", "Estimation", "Chaînes de Markov"]
+  bio: ""
+  photo: ""
+
+laaroussi:
+  nom: "Saâdeddine Laaroussi"
+  affiliation: ""
+  themes: ["Simulation des lois de probabilités", "Estimation", "Chaînes de Markov"]
+  bio: ""
+  photo: ""
+
+kharbane:
+  nom: "M. Kharbane"
+  affiliation: ""
+  themes: ["Programmation fonctionnelle", "OCaml"]
+  bio: ""
+  photo: ""
+
+elhadiq:
+  nom: "Zouhair El Hadiq"
+  affiliation: ""
+  themes: ["Méthodes d'enseignement", "EdTech", "LMS Moodle"]
+  bio: ""
+  photo: ""
+
+essaddouki:
+  nom: "M. Essaddouki"
+  affiliation: ""
+  themes: ["Théorie des graphes"]
+  bio: ""
+  photo: ""
+
+chafik:
+  nom: "M. Chafik"
+  affiliation: ""
+  themes: ["Théorie des jeux"]
+  bio: ""
+  photo: ""
+
+naim:
+  nom: "M. Naim"
+  affiliation: ""
+  themes: ["IA et pratique pédagogique"]
+  bio: ""
+  photo: ""
+
+malik:
+  nom: "M. Malik"
+  affiliation: ""
+  themes: ["Analyse et conception des algorithmes"]
+  bio: ""
+  photo: ""
+
+comite:
+  nom: "Comité d'organisation"
+  affiliation: "Ateliers, tables rondes et clôture"
+  themes: []
+  bio: ""
+  photo: ""
+  collectif: true

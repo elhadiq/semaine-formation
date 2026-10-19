@@ -1,0 +1,6 @@
+{{- /* Affiche les noms d'une liste d'identifiants d'intervenants */ -}}
+{{- $noms := slice -}}
+{{- range . -}}
+  {{- with index site.Data.intervenants . -}}{{- $noms = $noms | append .nom -}}{{- end -}}
+{{- end -}}
+{{- delimit $noms " · " -}}

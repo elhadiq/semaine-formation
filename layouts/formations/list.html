@@ -1,0 +1,23 @@
+{{ define "main" }}
+<section class="section section--page">
+  <div class="conteneur">
+    <header class="section__entete">
+      <p class="surtitre"><a href="{{ "/" | relURL }}">Accueil</a></p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </header>
+    <ul class="grille-formations">
+      {{ range .Pages.ByWeight }}
+      {{ $n := 0 }}{{ range .Resources }}{{ if not (in (slice "page") .ResourceType) }}{{ $n = add $n 1 }}{{ end }}{{ end }}
+      <li class="carte-form">
+        {{ with .Params.domaine }}<span class="etiquette">{{ . }}</span>{{ end }}
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ with .Params.intervenants }}<p class="creneau__qui">{{ partial "intervenant-noms.html" . }}</p>{{ end }}
+        {{ with .Params.resume }}<p>{{ . }}</p>{{ end }}
+        <p class="carte-form__compte">{{ if $n }}{{ $n }} support{{ if gt $n 1 }}s{{ end }}{{ else }}Supports à venir{{ end }}</p>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}

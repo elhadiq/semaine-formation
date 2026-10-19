@@ -1,0 +1,16 @@
+<a class="sauter" href="#contenu">Aller au contenu</a>
+<header class="entete">
+  <div class="conteneur entete__barre">
+    <a class="marque" href="{{ "/" | relURL }}">
+      <span class="marque__sigle" aria-hidden="true">SFA</span>
+      <span class="marque__texte">{{ site.Title }}<small>{{ site.Params.ville }} · 2026</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      {{ $home := "/" | relURL }}
+      <a href="{{ $home }}#programme">Programme</a>
+      <a href="{{ $home }}#intervenants">Intervenants</a>
+      <a href="{{ "formations/" | relURL }}"{{ if eq .Section "formations" }} aria-current="page"{{ end }}>Supports</a>
+      <a href="{{ $home }}#infos">Infos pratiques</a>
+    </nav>
+  </div>
+</header>
